@@ -17,7 +17,7 @@ import {SwipeListView} from 'react-native-swipe-list-view';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {SearchBar} from 'react-native-elements';
 
-const useDebounce = (value: any, delay: number) => {
+const useDebounce = (value, delay) => {
   const [debounceValue, setDebounceValue] = useState(value);
 
   useEffect(() => {
@@ -92,9 +92,7 @@ const ToDoApp = () => {
         newData = [...parseData, task];
         await AsyncStorage.setItem('task', JSON.stringify(newData));
       }
-      // console.log(task);
       setTaskList('');
-      console.log(newData);
     }
     retrieveData();
   };
@@ -122,7 +120,6 @@ const ToDoApp = () => {
       const newData = data.filter((_, index) => index !== id);
       setData(newData);
       await AsyncStorage.setItem('task', JSON.stringify(newData));
-      console.log('delete data');
     }
     retrieveData();
   };
@@ -154,7 +151,6 @@ const ToDoApp = () => {
     setData(changedData);
     setItemId(id);
     await AsyncStorage.setItem('task', JSON.stringify(changedData));
-    console.log('change data');
     retrieveData();
   };
 
@@ -167,7 +163,6 @@ const ToDoApp = () => {
       data[id].isComplete = false;
     }
     await AsyncStorage.setItem('task', JSON.stringify(data));
-    console.log('mark done');
     retrieveData();
   };
 
@@ -179,7 +174,6 @@ const ToDoApp = () => {
       data[id].isImportant = false;
     }
     await AsyncStorage.setItem('task', JSON.stringify(data));
-    console.log('mark important');
     retrieveData();
   };
 
@@ -190,7 +184,6 @@ const ToDoApp = () => {
     await AsyncStorage.setItem('task', JSON.stringify(data));
     setTaskList('');
     Keyboard.dismiss();
-    console.log('update data');
     retrieveData();
   };
 
@@ -198,7 +191,6 @@ const ToDoApp = () => {
     if (rowMap[rowKey]) {
       rowMap[rowKey].closeRow();
     }
-    console.log('row closed');
   };
 
   const renderItem = data => (
@@ -228,7 +220,6 @@ const ToDoApp = () => {
         style={[styles.backLeftBtn, styles.backLeftBtnLeft]}
         onPress={() => {
           markTaskDone(data.index, rowMap, data.item.key);
-          // console.log(taskCounter());
         }}>
         <Icon name="check" size={20} />
       </TouchableOpacity>
