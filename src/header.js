@@ -5,7 +5,7 @@ export default class Header extends React.Component {
   render() {
     return (
       <View style={styles.header}>
-        <Text style={styles.text}>ToDo Mou</Text>
+        <Text style={styles.text}>Swiper Todo</Text>
       </View>
     );
   }

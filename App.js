@@ -202,7 +202,6 @@ const ToDoApp = () => {
       ]}
       underlayColor={'#FFF'}
       onPress={() => {
-        // Alert.alert('Title', data.item.taskList);
         data.item.isImportant && !data.item.isComplete
           ? Alert.alert('Important Task', data.item.taskList)
           : [
@@ -217,7 +216,7 @@ const ToDoApp = () => {
             textDecorationLine: data.item.isComplete ? 'line-through' : 'none',
             padding: 30,
             fontSize: 14,
-            width: '80%',
+            width: '100%',
           }}
           numberOfLines={1}>
           {data.item.taskList}
@@ -276,7 +275,7 @@ const ToDoApp = () => {
             marginBottom: 10,
           }}>
           {' '}
-          {calcUndone} 个未完成事件
+          {calcUndone} unfinished task(s)
         </Text>
       </TouchableOpacity>
 
