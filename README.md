@@ -1,6 +1,12 @@
 # SwiperToDo
 
-How to use this app?
+## About This Project
+
+---
+
+In this project, `<SwipeListView>` is used which is also a vertical ListView but the rows can be swiped open and closed. By the way, this project is a tryout so don't bother it.
+
+## How to use this app?
 
 ![Screenshot](/img/Screenshot_index.png)
 ![Screenshot](/img/Screenshot_create_task.png)
