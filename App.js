@@ -8,14 +8,15 @@ import {
   TextInput,
   KeyboardAvoidingView,
   Keyboard,
+  Alert,
 } from 'react-native';
 
 import AsyncStorage from '@react-native-community/async-storage';
 import Header from './src/header';
-// import Config from './src/config';
 import {SwipeListView} from 'react-native-swipe-list-view';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {SearchBar} from 'react-native-elements';
+import {ConfirmDialog} from 'react-native-simple-dialogs';
 
 const useDebounce = (value, delay) => {
   const [debounceValue, setDebounceValue] = useState(value);
@@ -199,14 +200,26 @@ const ToDoApp = () => {
           ? styles.impRowFront
           : [data.item.isComplete ? styles.comRowFront : styles.defRowFront],
       ]}
-      underlayColor={'#FFF'}>
+      underlayColor={'#FFF'}
+      onPress={() => {
+        // Alert.alert('Title', data.item.taskList);
+        data.item.isImportant && !data.item.isComplete
+          ? Alert.alert('Important Task', data.item.taskList)
+          : [
+              data.item.isComplete
+                ? Alert.alert('Completed Task', data.item.taskList)
+                : Alert.alert('Unfinished Task', data.item.taskList),
+            ];
+      }}>
       <View>
         <Text
           style={{
             textDecorationLine: data.item.isComplete ? 'line-through' : 'none',
             padding: 30,
-            fontSize: 18,
-          }}>
+            fontSize: 14,
+            width: '80%',
+          }}
+          numberOfLines={1}>
           {data.item.taskList}
         </Text>
       </View>
@@ -277,6 +290,10 @@ const ToDoApp = () => {
           backgroundColor: '#FFF',
           marginBottom: 60,
         }}
+        keyExtractor={item => item.index}
+        key={data.map((item, index) => {
+          return index;
+        })}
       />
 
       <KeyboardAvoidingView
@@ -312,26 +329,26 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   defRowFront: {
-    alignItems: 'center',
     backgroundColor: '#EEE',
     borderBottomColor: '#777',
     borderBottomWidth: 1,
     justifyContent: 'center',
+    height: 50,
   },
   comRowFront: {
-    alignItems: 'center',
     backgroundColor: '#AAA',
     borderBottomColor: '#777',
     borderBottomWidth: 1,
     justifyContent: 'center',
+    height: 50,
   },
 
   impRowFront: {
-    alignItems: 'center',
     backgroundColor: '#FCA',
     borderBottomColor: '#777',
     borderBottomWidth: 1,
     justifyContent: 'center',
+    height: 50,
   },
 
   rowBack: {
@@ -386,10 +403,6 @@ const styles = StyleSheet.create({
     left: 60,
   },
 
-  trash: {
-    height: 25,
-    width: 25,
-  },
   footer: {
     position: 'absolute',
     width: '100%',
@@ -397,12 +410,14 @@ const styles = StyleSheet.create({
     bottom: 0,
     flex: 1,
   },
+
   footerInner: {
     position: 'relative',
     width: '100%',
     height: '100%',
     bottom: 0,
   },
+
   btn: {
     zIndex: 1,
     position: 'absolute',
@@ -417,10 +432,12 @@ const styles = StyleSheet.create({
     borderColor: '#fff',
     backgroundColor: '#262526',
   },
+
   btnText: {
     color: '#fff',
     fontSize: 20,
   },
+
   textInput: {
     zIndex: 0,
     flex: 1,
@@ -430,10 +447,12 @@ const styles = StyleSheet.create({
     color: '#fff',
     backgroundColor: '#262526',
   },
+
   end: {
     backgroundColor: '#123456',
   },
 });
+console.disableYellowBox = 'true';
+console.ignoredYellowBox = ['Warning: Each', 'Warning: Failed'];
 
 export default ToDoApp;
-console.disableYellowBox = 'true';
