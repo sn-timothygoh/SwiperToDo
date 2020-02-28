@@ -7,22 +7,35 @@ In this project, `<SwipeListView>` is used which is also a vertical ListView but
 ## How to use this app?
 ---
 #### Example of homescreen
-<img src="/img/Screenshot_index.png" width="100" height="100" />
+The screenshot below shows that there are 3 category of tasks which consist of unfinished, finished and important task.
+<img src="/img/Screenshot_index.png" width="270" height="480" />
 
-#### Example of creating task
-![Screenshot](/img/Screenshot_create_task.png){:height="270px" width="480px"} ![Screenshot](/img/Screenshot_create_new_task.png){:height="270px" width="480px"}
+---
 
-#### Example of editing task
-![Screenshot](/img/Screenshot_edit_task_before.png){:height="270px" width="480px"}
-![Screenshot](/img/Screenshot_edit_task.png){:height="270px" width="480px"}
-![Screenshot](/img/Screenshot_edit_task_after.png){:height="270px" width="480px"}
+#### 1. Creating task
+To create a new task, simply just tap on the text input area or textbar to insert whatever need to be done. Press + button on the textbar or tab on return on your keyboard to su
+<img src="/img/Screenshot_create_task.png" width="270" height="480" />
+<img src="/img/Screenshot_create_new_task.png" width="270" height="480" />
 
-#### Swipe to have more button or function
-![Screenshot](/img/Screenshot_swipe_to_left.png){:height="270px" width="480px"}
-![Screenshot](/img/Screenshot_swipe_to_right.png){:height="270px" width="480px"}
+---
 
-#### View full task content
-![Screenshot](/img/Screenshot_full_task_content.png){:height="270px" width="480px"}
+#### 2. Editing task
+<img src="/img/Screenshot_edit_task_before.png" width="270" height="480" />
+<img src="/img/Screenshot_edit_task.png" width="270" height="480" />
+<img src="/img/Screenshot_edit_task_after.png" width="270" height="480" />
 
-#### 
-![Screenshot](/img/Screenshot_search.png){:height="270px" width="480px"}
+---
+
+#### 3. Swipe to have more button or function
+<img src="/img/Screenshot_swipe_to_left.png" width="270" height="480" />
+<img src="/img/Screenshot_swipe_to_right.png" width="270" height="480" />
+
+---
+
+#### 4. View full task content
+<img src="/img/Screenshot_full_task_content.png" width="270" height="480" />
+
+---
+
+#### 5. Search
+<img src="/img/Screenshot_search.png" width="270" height="480" />
