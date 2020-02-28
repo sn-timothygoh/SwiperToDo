@@ -9,6 +9,7 @@ import {
   KeyboardAvoidingView,
   Keyboard,
   Alert,
+  YellowBox,
 } from 'react-native';
 
 import AsyncStorage from '@react-native-community/async-storage';
@@ -17,6 +18,9 @@ import {SwipeListView} from 'react-native-swipe-list-view';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {SearchBar} from 'react-native-elements';
 import {ConfirmDialog} from 'react-native-simple-dialogs';
+
+console.disableYellowBox = true;
+console.ignoredYellowBox = ['Warning: Each', 'Warning: Failed'];
 
 const useDebounce = (value, delay) => {
   const [debounceValue, setDebounceValue] = useState(value);
@@ -37,7 +41,7 @@ const useDebounce = (value, delay) => {
 const ToDoApp = () => {
   const [taskList, setTaskList] = React.useState('');
   const [data, setData] = React.useState([]);
-  const [itemId, setItemId] = useState(null);
+  const [itemId, setItemId] = useState('');
   const [toggle, setToggle] = useState(true);
   const [query, setQuery] = useState('');
   const debounceQuery = useDebounce(query, 0);
@@ -55,33 +59,37 @@ const ToDoApp = () => {
   }, [data]);
 
   useEffect(() => {
-    const searchItem = data
-      .filter(item =>
-        item.taskList.toLowerCase().includes(debounceQuery.toLowerCase()),
-      )
-      .map(item => ({
-        ...item,
-        rank: item.taskList.toLowerCase().indexOf(debounceQuery.toLowerCase()),
-      }))
-      .sort((a, b) => a.rank - b.rank);
+    textClear();
+  });
 
-    setData(searchItem);
-    if (!debounceQuery) {
-      retrieveData();
+  useEffect(() => {
+    if (data !== null) {
+      const searchItem = data
+        .filter(item =>
+          item.taskList.toLowerCase().includes(debounceQuery.toLowerCase()),
+        )
+        .map(item => ({
+          ...item,
+          rank: item.taskList
+            .toLowerCase()
+            .indexOf(debounceQuery.toLowerCase()),
+        }))
+        .sort((a, b) => a.rank - b.rank);
+
+      setData(searchItem);
+      if (!debounceQuery) {
+        retrieveData();
+      }
     }
-
-    // if (searchItem.length >= 1) {
-    //   retrieveData();
-    //   const reSearch = data
-    //     .filter(item => item.taskList.includes(debounceQuery.toLowerCase()))
-    //     .map(item => ({
-    //       ...item,
-    //       rank: item.taskList.indexOf(debounceQuery.toLowerCase()),
-    //     }))
-    //     .sort((a, b) => a.rank - b.rank);
-    //   setData(reSearch);
-    // }
   }, [debounceQuery]);
+
+  const textClear = async () => {
+    if (taskList !== null && taskList !== '') {
+      if (query !== null && query !== '') {
+        setQuery('');
+      }
+    }
+  };
 
   const saveData = async () => {
     if (taskList !== null && taskList !== '') {
@@ -131,9 +139,15 @@ const ToDoApp = () => {
   // delete data
   const clearData = async id => {
     if (data !== null) {
-      const newData = data.filter((_, index) => index !== id);
-      setData(newData);
-      await AsyncStorage.setItem('task', JSON.stringify(newData));
+      if (taskList === null || taskList === '') {
+        const newData = data.filter((_, index) => index !== id);
+        setData(newData);
+        await AsyncStorage.setItem('task', JSON.stringify(newData));
+      } else {
+        alert(
+          'You are currently in editing mode. You are not allowed to delete any data at the moment.',
+        );
+      }
     }
     retrieveData();
   };
@@ -289,10 +303,6 @@ const ToDoApp = () => {
           backgroundColor: '#FFF',
           marginBottom: 60,
         }}
-        keyExtractor={item => item.index}
-        key={data.map((item, index) => {
-          return index;
-        })}
       />
 
       <KeyboardAvoidingView
@@ -451,7 +461,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#123456',
   },
 });
-console.disableYellowBox = 'true';
-console.ignoredYellowBox = ['Warning: Each', 'Warning: Failed'];
 
 export default ToDoApp;
