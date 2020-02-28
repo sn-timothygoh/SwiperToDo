@@ -47,6 +47,13 @@ const ToDoApp = () => {
   const debounceQuery = useDebounce(query, 0);
   const [calcUndone, setUndone] = useState(0);
   const [retrievePermit, setRetrievePermit] = useState(true);
+  // const cloneData = Object.values(data)
+  //   .map(item => ({
+  //     ...item,
+  //     lowerCaseTask: item.taskList.toLowerCase(),
+  //   }))
+  //   .sort((a, b) => a.taskList > b.taskList);
+  // const [filterList, setFilterList] = useState(cloneData);
   // const [typeCheck, setTypeCheck] = useState('');
   // const [check, setCheck] = useState('');
 
@@ -63,20 +70,18 @@ const ToDoApp = () => {
   });
 
   useEffect(() => {
+    const lowerCaseQuery = debounceQuery.toLowerCase();
     if (data !== null) {
       const searchItem = data
-        .filter(item =>
-          item.taskList.toLowerCase().includes(debounceQuery.toLowerCase()),
-        )
+        .filter(item => item.taskList.toLowerCase().includes(lowerCaseQuery))
         .map(item => ({
           ...item,
-          rank: item.taskList
-            .toLowerCase()
-            .indexOf(debounceQuery.toLowerCase()),
+          rank: item.taskList.toLowerCase().indexOf(lowerCaseQuery),
         }))
         .sort((a, b) => a.rank - b.rank);
 
       setData(searchItem);
+      // setFilterList(searchItem);
       if (!debounceQuery) {
         retrieveData();
       }
@@ -131,25 +136,28 @@ const ToDoApp = () => {
   };
 
   const taskCounter = async () => {
-    let count = 202;
     let size = data.filter(item => !item.isComplete).length;
     setUndone(size);
   };
 
   // delete data
   const clearData = async id => {
-    if (data !== null) {
-      if (taskList === null || taskList === '') {
-        const newData = data.filter((_, index) => index !== id);
-        setData(newData);
-        await AsyncStorage.setItem('task', JSON.stringify(newData));
-      } else {
-        alert(
-          'You are currently in editing mode. You are not allowed to delete any data at the moment.',
-        );
+    if (query !== null && query !== '') {
+      alert('Please kindly clear the the search filter before deleting.');
+    } else {
+      if (data !== null) {
+        if (taskList === null || taskList === '') {
+          const newData = data.filter((_, index) => index !== id);
+          setData(newData);
+          await AsyncStorage.setItem('task', JSON.stringify(newData));
+        } else {
+          alert(
+            'You are currently in editing mode. You are not allowed to delete any data at the moment.',
+          );
+        }
       }
+      retrieveData();
     }
-    retrieveData();
   };
 
   const changeData = async (id, rowMap, rowKey) => {
@@ -277,6 +285,13 @@ const ToDoApp = () => {
         placeholder="Search..."
         onChangeText={setQuery}
         value={query}
+        // onChange={e => {
+        //   const test = data.filter(item => {
+        //     return item.taskList.includes(e.target.value);
+        //   });
+        //   setData(test);
+        //   // setQuery(e.target.value);
+        // }}
         platform="default"
       />
       <TouchableOpacity style={{borderTopWidth: 1, borderTopColor: '#EEE'}}>
@@ -288,7 +303,6 @@ const ToDoApp = () => {
             marginTop: 10,
             marginBottom: 10,
           }}>
-          {' '}
           {calcUndone} unfinished task(s)
         </Text>
       </TouchableOpacity>
