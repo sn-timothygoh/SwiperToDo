@@ -14,7 +14,7 @@ export default class Header extends React.Component {
 const styles = StyleSheet.create({
   header: {
     width: '100%',
-    height: 75,
+    height: '10%',
     borderBottomWidth: 3,
     borderBottomColor: '#ddd',
     alignItems: 'center',

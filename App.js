@@ -42,8 +42,8 @@ const ToDoApp = () => {
   const debounceQuery = useDebounce(query, 0);
   const [calcUndone, setUndone] = useState(0);
   const [retrievePermit, setRetrievePermit] = useState(true);
-  const [typeCheck, setTypeCheck] = useState('');
-  const [check, setCheck] = useState('');
+  // const [typeCheck, setTypeCheck] = useState('');
+  // const [check, setCheck] = useState('');
 
   useEffect(() => {
     if (retrievePermit) {
@@ -55,18 +55,31 @@ const ToDoApp = () => {
 
   useEffect(() => {
     const searchItem = data
-      .filter(item => item.taskList.includes(debounceQuery.toLowerCase()))
+      .filter(item =>
+        item.taskList.toLowerCase().includes(debounceQuery.toLowerCase()),
+      )
       .map(item => ({
         ...item,
-        rank: item.taskList.indexOf(debounceQuery.toLowerCase()),
+        rank: item.taskList.toLowerCase().indexOf(debounceQuery.toLowerCase()),
       }))
       .sort((a, b) => a.rank - b.rank);
 
-    // retrieveData().then(() => setData(searchItem));
     setData(searchItem);
     if (!debounceQuery) {
-      setRetrievePermit(true);
+      retrieveData();
     }
+
+    // if (searchItem.length >= 1) {
+    //   retrieveData();
+    //   const reSearch = data
+    //     .filter(item => item.taskList.includes(debounceQuery.toLowerCase()))
+    //     .map(item => ({
+    //       ...item,
+    //       rank: item.taskList.indexOf(debounceQuery.toLowerCase()),
+    //     }))
+    //     .sort((a, b) => a.rank - b.rank);
+    //   setData(reSearch);
+    // }
   }, [debounceQuery]);
 
   const saveData = async () => {
@@ -123,20 +136,6 @@ const ToDoApp = () => {
     }
     retrieveData();
   };
-
-  // mark priority
-  // const highlightData = async id => {
-  //   if (data !== null) {
-  //     const highlightedData = data.map((item, index) => {
-  //       if (index === id) {
-  //         item.show = !item.show;
-  //       }
-  //       return item;
-  //     });
-  //     setData(highlightedData);
-  //     await AsyncStorage.setItem('task', JSON.stringify(highlightedData));
-  //   }
-  // };
 
   const changeData = async (id, rowMap, rowKey) => {
     setToggle(false);
@@ -252,8 +251,9 @@ const ToDoApp = () => {
         placeholder="Search..."
         onChangeText={setQuery}
         value={query}
+        platform="default"
       />
-      <TouchableOpacity>
+      <TouchableOpacity style={{borderTopWidth: 1, borderTopColor: '#EEE'}}>
         <Text
           style={{
             fontSize: 20,
@@ -425,6 +425,7 @@ const styles = StyleSheet.create({
     zIndex: 0,
     flex: 1,
     padding: 20,
+    paddingRight: 75,
     fontSize: 16,
     color: '#fff',
     backgroundColor: '#262526',
