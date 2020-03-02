@@ -23,17 +23,14 @@ To create a new task, simply just tap on the text input area or textbar to inser
 #### 2. Editing task
 To edit or modify task, at selected task, slide it to left, tap on the yellow area and the text will be shown in the text input area. Modify the changes and submit again to update the data.
 -
-<img src="/img/Screenshot_edit_task_before.png" width="270" height="480" />
-<img src="/img/Screenshot_edit_task.png" width="270" height="480" />
-<img src="/img/Screenshot_edit_task_after.png" width="270" height="480" />
+<img src="/img/Screenshot_edit_task_before.png" width="270" height="480" /> <img src="/img/Screenshot_edit_task.png" width="270" height="480" /> <img src="/img/Screenshot_edit_task_after.png" width="270" height="480" />
 
 ---
 
 #### 3. Swipe to have more button or function
 Other than edit, we have delete button (red), and on the right side we have mark task as done (green) and mark task as important (teal).
 -
-<img src="/img/Screenshot_swipe_to_left.png" width="270" height="480" />
-<img src="/img/Screenshot_swipe_to_right.png" width="270" height="480" />
+<img src="/img/Screenshot_swipe_to_left.png" width="270" height="480" /> <img src="/img/Screenshot_swipe_to_right.png" width="270" height="480" />
 
 ---
 
