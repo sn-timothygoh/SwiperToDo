@@ -16,8 +16,7 @@ The screenshot below shows that there are 3 category of tasks which consist of u
 #### 1. Creating task
 To create a new task, simply just tap on the text input area or textbar to insert whatever need to be done. Press + button on the textbar or tab on return on your keyboard to submit task inserted.
 -
-<img src="/img/Screenshot_create_task.png" width="270" height="480" />
-<img src="/img/Screenshot_create_new_task.png" width="270" height="480" />
+<img src="/img/Screenshot_create_task.png" width="270" height="480" /> <img src="/img/Screenshot_create_new_task.png" width="270" height="480" />
 
 ---
 
