@@ -12,7 +12,7 @@
   "dependencies": {
     "@react-native-community/async-storage": "^1.8.0",
     "react": "16.9.0",
-    "react-native": "0.61.5",
+    "react-native": "0.62.3",
     "react-native-elements": "^1.2.7",
     "react-native-simple-dialogs": "^1.2.1",
     "react-native-swipe-list-view": "^2.2.0",
